@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fastfibres.com</title>
+    <link rel="stylesheet" href="style.css">
+<div style = "display:inline; margin-right: 15px;justify-content: center;color: darkred;">
+<a href="about.html" style="color:darkblue">About Us</a>
+<a href="services.html" style="color:darkblue">Services</a>
+<a href="contact.html" style="color:darkblue">Contact Us</a>
+</div>
+<div class = "header">
+        <p class ="header text">FAST FIBER</p>
+        </div>
+    <h2>Your Fastest and most reliable networks</h2>
+</head>
+<body>
+  <h2>Select a Plan</h2>
+  <form id="paymentForm">
+    <label for="phone">M-Pesa Phone Number:</label>
+  <input type="text" id="phone" placeholder="Enter M-Pesa phone number" />
+  <button type="submit">Submit</button>
+  </form>
+ <script>
+  let userPhone = "";
+
+  document.getElementById("paymentForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    userPhone = document.getElementById("phone").value;
+    alert("Phone number saved: " + userPhone);
+  });
+
+  async function payWithMpesa(amount) {
+    if (!userPhone) {
+      alert("Please enter your phone number first!");
+      return;
+    }
+        let formattedPhone = userPhone.replace(/[\s-]/g, '');
+    
+    if (formattedPhone.startsWith('0')) {
+        formattedPhone = '254' + formattedPhone.substring(1);
+    } else if (formattedPhone.startsWith('+254')) {
+        formattedPhone = formattedPhone.substring(1);
+    } else if (!formattedPhone.startsWith('254')) {
+        formattedPhone = '254' + formattedPhone;
+    }
+
+    const paymentData = {
+      phone: userPhone,
+      amount: amount
+    };
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(paymentData)
+      });
+
+      const result = await response.json();
+      
+      if (response.ok) {
+        alert("Payment initiated! Check your phone for M-Pesa prompt.");
+        console.log("Payment response:", result);
+      } else {
+        alert("Payment failed: " + (result.detail || "Unknown error"));
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Failed to send payment request: " + error.message);
+    }
+  }
+
+
+  function loadMessage(message) {
+   
+    console.log(message);
+  }
+</script>
+  
+
+  <div class="box-container">
+    <div id="basic" class="plan-details">
+  
+        <div class = "box">
+          <ul>
+        <h2>Basic Plan</h2>
+        <li><p>Speed: Up to 5 Mbps</p></li>
+        <li><p>Ideal for light users who browse and stream in HD.</p></li>
+        <li><p>Charges: 1500 kshs per month</p></li>
+        </ul>
+        <button onclick="payWithMpesa(1500)">Click to Pay</button>
+        
+</div>
+    </div>
+    <div id="standard" class="plan-details">
+     <div class = "box">
+      <ul>
+     <h2>Standard Plan</h2>
+       <li> <p>Speed: Up to 10 Mbps</p></li>
+        <li><p>Perfect for families with multiple devices streaming and gaming.</p></li>
+        <li><p>charges: 2000 kshs per month</p></li>
+          </ul>
+          <button onclick="payWithMpesa(2000)">Click to Pay</button>
+       </div>
+        </div>
+    <div id="premium" class="plan-details">
+        <div class = "box">
+          <ul>
+        <h2>Premium Plan</h2>
+        <li><p>Speed: Up to 15 Mbps</p></li>
+        <li><p>Great for heavy users who stream in 4K and game online.</p></li>
+        <li><p>Charges 2500 ksh per month </p></li>
+        </ul>
+        <button onclick="payWithMpesa(2500)">Click to Pay</button>
+     </div>
+    </div>
+    </div>
+    <div class="box-container center-row">
+    <div id="ultra" class="plan-details">
+        <div class = "box">
+           <ul>
+        <h2>Ultra Plan</h2>
+        <li><p>Speed: Up to 20 Mbps</p></li>
+        <li><p>Best for businesses and power users needing maximum speed.</p></li>
+       <li><p>Charges 3500 ksh per month</p></li>
+       </ul>
+        <button onclick="payWithMpesa(3500)">Click to Pay</button>
+        </div>
+        </div>
+    <div id="premium ultra" class="plan-details">
+        <div class = "box">
+         <ul>
+        <h2>Premium Ultra Plan</h2>
+        <li><p>Speed: Up to 30 mbps</p></li>
+        <li><p>Ultimate speed for large households and enterprises.</p></li>
+        <li><p>Charges 4000 ksh per month</p></li>
+        </ul>
+        <button onclick="payWithMpesa(4000)">Click to Pay</button>
+          </div>
+          </div>
+      </div>
+<br>
+<br>
+<strong><h3>Availability of our network connection</h3></strong>
+<p>Our network is currently available all around Ruiru</p>
+</body>
+</html>
