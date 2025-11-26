@@ -3,14 +3,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from .routers.payments import router as payments_router
 
 app = FastAPI()
-origins = [
-    "https://Eunice-ctrlz.github.io",
-    "http://localhost:5500",
-]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
+    
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
