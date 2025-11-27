@@ -2,9 +2,10 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from typing import Optional
-from ..database import SessionLocal
+from ..database import SessionLocal, engine,Base,get_db
 from ..models import Customer, Service, Payment
 from ..mpesa import stk_push
+from backend import models
 from ..crud import (
     create_customer,
     get_customer_by_phone,
@@ -13,6 +14,7 @@ from ..crud import (
     update_payment_status_by_checkout_id,
     get_payment
 )
+Base.metadata.create_all(bind=engine)
 
 router = APIRouter()
 
@@ -223,3 +225,11 @@ async def get_all_services(db: Session = Depends(get_db)):
             "status": "error",
             "message": str(e)
         }
+@router.get("/")
+def read_root():
+    return {"message": "FastAPI with Railway MySQL"}
+
+@router.get("/payments")
+def get_payments(db: Session = Depends(get_db)):
+    payments = db.query(models.Payment).all()
+    return {"payments": payments}
