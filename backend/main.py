@@ -3,6 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from .routers.payments import router as payments_router
 
 app = FastAPI()
+@app.get("/")
+def main_root():
+   
+    return {"message": "Welcome to the API!"}
 origins = [
     "https://Eunice-ctrlz.github.com",
     "https://github.com/Eunice-ctrlz/FastFibersWebsite",
