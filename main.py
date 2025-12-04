@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.routers import payment
+from backend.routers.payment import router as payment_router  # Changed this line
 from backend.database import engine, Base
 import os
 
@@ -14,15 +14,15 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# CORS Configuration - CRITICAL FOR FRONTEND TO WORK
+# CORS Configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://Eunice-ctrlz.github.io",  # Your GitHub Pages site
+        "https://eunice-ctrlz.github.io",
         "http://localhost:3000",
         "http://localhost:5173",
         "http://127.0.0.1:5500",
-        "*"  # Allow all origins (remove in production for better security)
+        "*"
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -31,7 +31,7 @@ app.add_middleware(
 )
 
 # Include payment router
-app.include_router(payment.router, tags=["payments"])
+app.include_router(payment_router, tags=["payments"])  # Changed this line
 
 # Root endpoint
 @app.get("/")
