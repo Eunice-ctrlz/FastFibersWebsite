@@ -34,16 +34,16 @@ Professional layout: Clean, modern, and easy-to-navigate interface
 
 ## Tech Stack
 
-| Category                     | Technology                | Purpose                                                       |
-|                              |                           |                                                               |
-| **Backend Framework**        | **FastAPI**               | High-performance, low-latency API development.                |
-| **Asynchronous Server**      | **Uvicorn**               | ASGI server for serving the FastAPI application.              |
-| **Database**                 | **MySQL**                 | Relational database for storing service data and records.     |
-| **ORM / Database Toolkit**   | **SQLAlchemy**            | Python SQL toolkit and Object Relational Mapper.              |
-| **Frontend**                 | **HTML, CSS, JavaScript** | User interface, responsive and interactive design.            |
-| **Deployment**               | **Railway**               | Cloud platform for backend hosting and continuous deployment. |
-| **Frontend Hosting**         | **GitHub Pages**          | Hosting static frontend files for public access.              |
-| **Configuration Management** | **pydantic-settings**     | Secure, type-checked environment variable management.         |
+| Category                 | Technology                 | Purpose                                                    |
+|--------------------------|---------------------------|-------------------------------------------------------------|
+| Backend Framework        | FastAPI                   | High-performance, low-latency API development.              |
+| Asynchronous Server      | Uvicorn                   | ASGI server for serving the FastAPI application.            |
+| Database                 | MySQL                     | Relational database for storing service data and records.   |
+| ORM / Database Toolkit   | SQLAlchemy                | Python SQL toolkit and Object Relational Mapper.            |
+| Frontend                 | HTML, CSS, JavaScript     | User interface, responsive and interactive design.          |
+| Deployment               | Railway                   | Cloud platform for backend hosting and continuous deployment.|
+| Frontend Hosting         | GitHub Pages              | Hosting static frontend files for public access.            |
+| Configuration Management | pydantic-settings         | Secure, type-checked environment variable management.       |
 
 
 ---
@@ -124,3 +124,4 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 * **Author:** EUNICE WAIRIMU MUTURI
 * **LinkedIn:** https://www.linkedin.com/in/eunice-muturi-7023b6342/
 * **Email:** emuturi339@gmail.com
+
