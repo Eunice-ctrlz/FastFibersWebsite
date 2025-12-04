@@ -37,7 +37,7 @@ async def make_payment(payment: PaymentRequest, db: Session = Depends(get_db)):
     print("=" * 50)
     
     try:
-        # Initiate M-Pesa STK push
+       
         mpesa_response = stk_push(payment.phone, payment.amount)
         print("M-Pesa Response:", mpesa_response)
         
@@ -47,7 +47,7 @@ async def make_payment(payment: PaymentRequest, db: Session = Depends(get_db)):
         if response_code == '0':
             print("✓ M-Pesa request successful")
             
-            # Get or create customer
+         
             customer = get_customer_by_phone(db, payment.phone)
             
             if not customer:
@@ -56,14 +56,14 @@ async def make_payment(payment: PaymentRequest, db: Session = Depends(get_db)):
             else:
                 print(f"✓ Existing customer found with ID: {customer.id}")
             
-            # Get service if provided
+           
             service = None
             if payment.service_id:
                 service = get_service(db, payment.service_id)
                 if not service:
                     print(f"⚠ Service ID {payment.service_id} not found, proceeding without service")
             
-            # Save payment to database
+           
             db_payment = create_payment(
                 db=db,
                 customer_id=customer.id,
@@ -87,7 +87,7 @@ async def make_payment(payment: PaymentRequest, db: Session = Depends(get_db)):
                 "mpesa_response": mpesa_response
             }
         else:
-            # M-Pesa request failed
+           
             error_message = mpesa_response.get('errorMessage', 'Unknown error')
             print(f"✗ M-Pesa request failed: {error_message}")
             print("=" * 50)

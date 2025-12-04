@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from typing import Optional
 import os
 
-# Direct imports from backend (NO routers)
+
 from backend.database import SessionLocal, Base, engine
 from backend.models import Customer, Service, Payment
 from backend.mpesa import stk_push
@@ -17,21 +17,21 @@ from backend.crud import (
     get_payment
 )
 
-# Create database tables
+
 try:
     Base.metadata.create_all(bind=engine)
     print("✓ Database tables created")
 except Exception as e:
     print(f"✗ Database error: {e}")
 
-# Initialize FastAPI
+
 app = FastAPI(
     title="Payment API",
     description="M-Pesa Payment Processing API",
     version="1.0.0"
 )
 
-# CORS
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["https://eunice-ctrlz.github.io", "http://localhost:3000", "*"],
@@ -41,7 +41,7 @@ app.add_middleware(
     expose_headers=["*"]
 )
 
-# Models
+
 class PaymentRequest(BaseModel):
     phone: str
     amount: float
@@ -54,7 +54,7 @@ def get_db():
     finally:
         db.close()
 
-# ENDPOINTS
+
 @app.get("/")
 async def root():
     return {
